@@ -1,4 +1,4 @@
-namespace RealEstate
+namespace GateWay
 {
     public class WeatherForecast
     {

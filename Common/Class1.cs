@@ -17,4 +17,5 @@
 
         public DateTime BirthDate { get; set; }
     }
+
 }

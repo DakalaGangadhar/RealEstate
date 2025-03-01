@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Admin.Controllers
+namespace GateWay.Controllers
 {
     [ApiController]
     [Route("[controller]")]
