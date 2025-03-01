@@ -5,5 +5,12 @@
         public string str { get; set; }
 
         public string strTest { get; set; }
+
+        public double Salary { get; set; }
+
+        public int Id { get; set; }
+        public bool IsParminant { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }
