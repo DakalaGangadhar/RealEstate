@@ -13,14 +13,16 @@ namespace User.Controllers
     {
         private readonly JwtService _jwtService;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AuthController> _logger;
         private readonly string _accountSid;
         private readonly string _authToken;
         private readonly string _fromPhoneNumber;
 
-        public AuthController(JwtService jwtService, IConfiguration configuration)
+        public AuthController(JwtService jwtService, IConfiguration configuration, ILogger<AuthController> logger)
         {
             _jwtService = jwtService;
             _configuration = configuration;
+            _logger = logger;
             _accountSid = _configuration["Twilio:AccountSid"];
             _authToken = _configuration["Twilio:AuthToken"];
             _fromPhoneNumber = _configuration["Twilio:FromPhoneNumber"];
@@ -34,8 +36,8 @@ namespace User.Controllers
         [HttpPost("send-otp")]
         public IActionResult SendOTP([FromBody] PhoneNumberRequest request)
         {
-            try
-            {
+            //try
+            //{
                 // Validate user credentials (e.g., against a database)
                 if (!string.IsNullOrEmpty(request.PhoneNumber))
                 {
@@ -52,11 +54,12 @@ namespace User.Controllers
                 }
 
                 return Unauthorized();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "An error occurred while send-otp.");
+            //    return BadRequest(ex.Message);
+            //}
 
         }
 
@@ -80,6 +83,7 @@ namespace User.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "An error occurred while verify-otp.");
                 return BadRequest(ex.Message);
             }
 

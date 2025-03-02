@@ -1,5 +1,6 @@
 using Admin;
 using Common;
+using Common.ExceptionHandle;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,28 +12,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen(x =>
 {
     x.SwaggerDoc("v2", new OpenApiInfo { Title = "Admin Application", Version = "v1" });
-    x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Please enter token enter 'bearer' [space] <token>"
-    });
-    x.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference=new OpenApiReference
-                            {
-                                Type=ReferenceType.SecurityScheme,
-                                Id="Bearer"
-                            }
-                        },
-                        new string[]{ }
-                    }
-                });
+    //x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    //{
+    //    Name = "Authorization",
+    //    Type = SecuritySchemeType.ApiKey,
+    //    Scheme = "Bearer",
+    //    BearerFormat = "JWT",
+    //    In = ParameterLocation.Header,
+    //    Description = "Please enter token enter 'bearer' [space] <token>"
+    //});
+    //x.AddSecurityRequirement(new OpenApiSecurityRequirement {
+    //                {
+    //                    new OpenApiSecurityScheme
+    //                    {
+    //                        Reference=new OpenApiReference
+    //                        {
+    //                            Type=ReferenceType.SecurityScheme,
+    //                            Id="Bearer"
+    //                        }
+    //                    },
+    //                    new string[]{ }
+    //                }
+    //            });
 });
 
 // Configure JWT Authentication
@@ -56,9 +57,15 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<JwtService>();
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Add services to the container.
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+});
+
 
 var app = builder.Build();
 
@@ -79,6 +86,7 @@ app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
