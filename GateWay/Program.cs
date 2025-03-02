@@ -24,8 +24,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication(); // Important: Add authentication middleware
+app.UseAuthorization(); // Important: Add authorization middleware
 
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseRouting();
 app.UseOcelot().Wait();
 
 app.MapControllers();

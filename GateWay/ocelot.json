@@ -1,6 +1,7 @@
 {
   "Routes": [
     {
+      //------Admin services-------------------
       "DownstreamPathTemplate": "/api/home/get",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,6 +12,31 @@
       ],
       "UpstreamPathTemplate": "/api/gateway/get",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    //------User services-------------------
+    {
+      "DownstreamPathTemplate": "/api/auth/send-otp",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44323
+        }
+      ],
+      "UpstreamPathTemplate": "/api/gateway/send-otp",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/verify-otp",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44323
+        }
+      ],
+      "UpstreamPathTemplate": "/api/gateway/verify-otp",
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {
