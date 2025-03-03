@@ -1,6 +1,7 @@
 using Admin;
 using Common;
 using Common.ExceptionHandle;
+using Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -59,6 +60,10 @@ builder.Services.AddScoped<JwtService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Add services to the container.
+builder.Services.Configure<GoogleMapsSettings>(builder.Configuration.GetSection("GoogleMaps"));
+builder.Services.AddHttpClient(); // Add IHttpClientFactory
 
 // Add services to the container.
 builder.Services.AddControllers(options =>
