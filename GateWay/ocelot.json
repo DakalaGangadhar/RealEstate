@@ -20,7 +20,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44323
+          "Port": 7015
         }
       ],
       "UpstreamPathTemplate": "/api/gateway/send-otp",
@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44323
+          "Port": 7015
         }
       ],
       "UpstreamPathTemplate": "/api/gateway/verify-otp",
