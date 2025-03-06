@@ -1,16 +1,28 @@
 {
   "Routes": [
+    //------Admin services-------------------
     {
-      //------Admin services-------------------
       "DownstreamPathTemplate": "/api/home/get",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7100
+          "Port": 44325
         }
       ],
       "UpstreamPathTemplate": "/api/gateway/get",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/geocode/geocode",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44325
+        }
+      ],
+      "UpstreamPathTemplate": "/api/gateway/geocode",
       "UpstreamHttpMethod": [ "Get" ]
     },
     //------User services-------------------

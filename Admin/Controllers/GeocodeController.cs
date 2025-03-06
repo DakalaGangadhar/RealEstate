@@ -18,13 +18,23 @@ namespace Admin.Controllers
         private readonly string _googleapisGeocode;
         private readonly GeometryFactory _geometryFactory;
         // In a real application, you would replace this with a database or other persistent storage.
-        private static readonly List<Location> _locations = new()
+        private static readonly List<GeoLocation> _locations = new()
         {
-            new Location { Id = 1, Name = "Point A", Latitude = 51.5074, Longitude = 0.1278 }, // London
-            new Location { Id = 2, Name = "Point B", Latitude = 51.5110, Longitude = 0.1298 }, // Near london
-            new Location { Id = 3, Name = "Point C", Latitude = 48.8566, Longitude = 2.3522 }, // Paris
-            new Location { Id = 4, Name = "Point D", Latitude = 40.7128, Longitude = -74.0060 }, // New York
-            new Location { Id = 4, Name = "Point D", Latitude = 13.0448212, Longitude = 77.7485411 },
+            new GeoLocation { Id = 1, Name = "Point A", Latitude = 51.5074, Longitude = 0.1278 }, // London
+            new GeoLocation { Id = 2, Name = "Point B", Latitude = 51.5110, Longitude = 0.1298 }, // Near london
+            new GeoLocation { Id = 3, Name = "Point C", Latitude = 48.8566, Longitude = 2.3522 }, // Paris
+            new GeoLocation { Id = 4, Name = "Point D", Latitude = 40.7128, Longitude = -74.0060 }, // New York
+            new GeoLocation { Id = 5, Name = "Point D", Latitude = 13.0448212, Longitude = 77.7485411 },
+             new GeoLocation { Id = 6, Name ="Kondasapura", Latitude = 13.045401, Longitude = 77.750944 },
+            new GeoLocation { Id = 7, Name = "Kondasapura2", Latitude =13.044638, Longitude =  77.748756 },
+            new GeoLocation { Id = 8, Name = "Kondasapura3", Latitude =13.043447, Longitude =  77.747050 },
+             new GeoLocation { Id = 9, Name = "virgonagar", Latitude =13.042861, Longitude =  77.744968 },
+              new GeoLocation { Id =10, Name = "virgonagar2", Latitude =13.039120, Longitude =  77.739829},
+               new GeoLocation { Id = 11, Name = "Avalahalli, 1st Cross Rd, panchite, Aavalahalli, Bengaluru, Karnataka", Latitude =13.035670, Longitude =  77.736096 },
+               new GeoLocation { Id = 12, Name = "103, Old Madras Rd, Avalahalli, Aavalahalli, Bengaluru, Karnataka", Latitude =13.033068, Longitude =   77.732598 },
+               new GeoLocation { Id =13, Name = "Aavalahalli, Bengaluru, Karnataka 560049", Latitude =13.028019, Longitude =  77.724380 },
+               new GeoLocation { Id = 14, Name = "156, Medahalli Kadugodi Rd, Virgonagar Industrial Estate, Aavalahalli, Bengaluru, Karnataka 560049", Latitude =13.026127, Longitude =  77.720989 },
+               new GeoLocation { Id = 15, Name = "RMS Colony, TC Palya, Krishnarajapuram, Bengaluru, Karnataka ", Latitude =13.019295, Longitude =  77.708669 },
 
         };
 
@@ -87,7 +97,7 @@ namespace Admin.Controllers
         {
             if (distanceInMeters <= 0)
             {
-                return BadRequest("Distance must be greater than zero.");
+                distanceInMeters = 20000;
             }
 
             var centerPoint = _geometryFactory.CreatePoint(new Coordinate(longitude, latitude));
@@ -103,12 +113,5 @@ namespace Admin.Controllers
             return Ok(results);
         }
 
-    }
-    public class Location
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
     }
 }
