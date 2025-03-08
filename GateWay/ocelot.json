@@ -7,7 +7,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44325
+          "Port": 44300
         }
       ],
       "UpstreamPathTemplate": "/api/gateway/get",
@@ -19,7 +19,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44325
+          "Port": 44300
         }
       ],
       "UpstreamPathTemplate": "/api/gateway/geocode",

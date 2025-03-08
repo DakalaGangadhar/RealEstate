@@ -6,7 +6,7 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite;
 
 
-namespace Admin.Controllers
+namespace RealEstate.Admin.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
