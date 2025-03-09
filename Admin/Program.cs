@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using RealEstate.Application.Services;
 using System.Text;
 using RealEstate.Application.Handlers;
+using RealEstate.Application;
+using RealEstate.Internal.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,7 +71,7 @@ builder.Services.Configure<GoogleMapsSettings>(builder.Configuration.GetSection(
 builder.Services.AddHttpClient(); // Add IHttpClientFactory
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(TestServicesHandler).Assembly)); // Replace typeof(Program).Assembly with the assembly containing your handlers.
-
+builder.Services.AddInfrastructureServices();
 
 // Add services to the container.
 builder.Services.AddControllers(options =>
